@@ -15,6 +15,7 @@ if (!empty($_POST['mandrill_events'])) {
 		if (isset($message['msg']['raw_msg'])) {
 			$params = array(
 				'raw_message' => $message['msg']['raw_msg'],
+				'to' => array('xiankai@gmail.com'),
 			);
 
 			$mandrill->call('/messages/send-raw', $params);
