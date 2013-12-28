@@ -12,11 +12,9 @@ if (!empty($_POST['mandrill_events'])) {
 	}
 
 	foreach ($payload as $message) {
-		if (isset($payload['msg']['raw_msg'])) {
-			$raw_message = $payload['msg']['raw_msg'];
-
+		if (isset($message['msg']['raw_msg'])) {
 			$params = array(
-				'raw_message' => $message['raw_msg'],
+				'raw_message' => $message['msg']['raw_msg'],
 			);
 
 			$mandrill->call('messages/send-raw.json', $params);
