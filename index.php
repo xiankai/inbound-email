@@ -17,7 +17,7 @@ if (!empty($_POST['mandrill_events'])) {
 				'raw_message' => $message['msg']['raw_msg'],
 			);
 
-			$mandrill->call('messages/send-raw.json', $params);
+			$mandrill->call('/messages/send-raw.json', $params);
 		}	
 	}
 	
