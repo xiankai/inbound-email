@@ -2,7 +2,9 @@
 
 require 'vendor/autoload.php';
 
-$mandrill = new Mandrill('n4K2QMp31EgJx0umLxX4Ig');
+$external_config = parse_ini_file('/repos/config/mandrill.ini');
+
+$mandrill = new Mandrill($external_config['mandrill_key']);
 
 if (!empty($_POST['mandrill_events'])) {	
 	$payload = json_decode($_POST['mandrill_events'], true);
@@ -15,7 +17,7 @@ if (!empty($_POST['mandrill_events'])) {
 		if (isset($message['msg']['raw_msg'])) {
 			$params = array(
 				'raw_message' => $message['msg']['raw_msg'],
-				'to' => array('xiankai@gmail.com'),
+				'to' => array($external_config['to_email']),
 			);
 
 			$mandrill->call('/messages/send-raw', $params);
